@@ -14,7 +14,7 @@ public class Client2 {
         Cat catTarget = new Cat();
 
         // 2. 构造 Handler 对象
-        AbstractHandler headHandler = new AbstractHandler.HeadHandler();
+        AbstractHandler.HeadHandler headHandler = new AbstractHandler.HeadHandler();
 
         AbstractHandler handler1 = new Handler1();
         headHandler.setNextHandler(handler1);

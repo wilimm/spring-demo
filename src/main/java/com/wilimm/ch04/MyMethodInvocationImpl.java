@@ -36,7 +36,7 @@ public class MyMethodInvocationImpl implements MyMethodInvocation {
             return targetMethod.getMethod().invoke(targetMethod.getTarget(), targetMethod.getArgs());
         }
 
-        // 获取一个拦截器，并调用其 invoke 方法
+        // 获取下一个拦截器，并调用其 invoke 方法
         MyMethodInterceptor methodInterceptor =
                 this.interceptorList.get(this.currentInterceptorIndex++);
 

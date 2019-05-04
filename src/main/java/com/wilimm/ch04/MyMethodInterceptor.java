@@ -8,5 +8,11 @@ package com.wilimm.ch04;
  */
 public interface MyMethodInterceptor {
 
+    /**
+     * 类似于 InvocationHandler 的 invoke 方法，用于对方法做增强处理，并通过 invocation 参数驱动责任链向前运行
+     * @param invocation
+     * @return
+     * @throws Throwable
+     */
     Object invoke(MyMethodInvocation invocation) throws Throwable;
 }

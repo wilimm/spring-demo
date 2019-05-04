@@ -2,6 +2,8 @@ package com.wilimm.ch04;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Setter;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -9,12 +11,12 @@ import java.lang.reflect.Method;
  * @Author: wilimm
  * @Date: 2019/5/4 12:44
  */
-@Data
 public abstract class AbstractHandler {
 
     /**
      * 责任链中下一个处理者
      */
+    @Setter
     private AbstractHandler nextHandler;
 
     /**

@@ -9,9 +9,6 @@ import com.wilimm.ch02.Cat;
  */
 public class Client1 {
     public static void main(String[] args) {
-        // 设置此系统属性,让 JVM 生成的 Proxy 类写入文件.保存路径为项目的根目录
-        System.setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
-
         // 1. 构造目标对象
         Cat catTarget = new Cat();
 

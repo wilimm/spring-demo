@@ -19,9 +19,9 @@ public class JdkDynamicProxy2 implements InvocationHandler {
     private Object target;
 
     /**
-     * 责任链第一个处理 Handler
+     * 责任链 HeadHandler，仅用来开始责任链执行，不对方法进行增强处理
      */
-    private AbstractHandler firstHandler;
+    private AbstractHandler.HeadHandler headHandler;
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -30,7 +30,7 @@ public class JdkDynamicProxy2 implements InvocationHandler {
         targetMethod.setMethod(method);
         targetMethod.setArgs(args);
 
-        return firstHandler.proceed(targetMethod);
+        return headHandler.proceed(targetMethod);
     }
 
     /**
