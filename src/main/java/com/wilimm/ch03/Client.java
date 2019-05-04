@@ -1,7 +1,8 @@
-package com.wilimm.proxy.cglib;
+package com.wilimm.ch03;
 
+import com.wilimm.ch03.CglibDynamicProxy;
+import com.wilimm.ch03.Service;
 import net.sf.cglib.core.DebuggingClassWriter;
-import net.sf.cglib.core.Predicate;
 
 /**
  * @Author: wilimm
@@ -9,7 +10,10 @@ import net.sf.cglib.core.Predicate;
  */
 public class Client {
     public static void main(String[] args) {
-
+        // 获取当前项目的根目录
+        String userDir = System.getProperty("user.dir");
+        //System.setProperty("cglib.debugLocation", userDir);
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, userDir);
 
         // 1. 构造目标对象
         Service target = new Service();

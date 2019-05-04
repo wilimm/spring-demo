@@ -1,4 +1,8 @@
-package com.wilimm.proxy.jdk;
+package com.wilimm.ch02;
+
+import com.wilimm.ch02.Animal;
+import com.wilimm.ch02.Cat;
+import com.wilimm.ch02.JdkDynamicProxy;
 
 /**
  * @Author: wilimm

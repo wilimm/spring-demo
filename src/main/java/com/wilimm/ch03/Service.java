@@ -1,4 +1,4 @@
-package com.wilimm.proxy.cglib;
+package com.wilimm.ch03;
 
 import net.sf.cglib.core.Predicate;
 

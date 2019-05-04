@@ -1,4 +1,6 @@
-package com.wilimm.proxy.jdk;
+package com.wilimm.ch04;
+
+import lombok.Data;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -6,9 +8,10 @@ import java.lang.reflect.Proxy;
 
 /**
  * @Author: wilimm
- * @Date: 2019/5/2 11:39
+ * @Date: 2019/5/4 11:43
  */
-public class JdkDynamicProxy implements InvocationHandler {
+@Data
+public class JdkDynamicProxy1 implements InvocationHandler {
     /**
      *  目标对象（也被称为被代理对象）
      *
@@ -16,7 +19,12 @@ public class JdkDynamicProxy implements InvocationHandler {
      */
     private Object target;
 
-    public JdkDynamicProxy(Object target){
+    /**
+     * 用来标识 InvocationHandler invoke 调用
+     */
+    private String tag;
+
+    public JdkDynamicProxy1(Object target){
         this.target=target;
     }
 
@@ -30,10 +38,24 @@ public class JdkDynamicProxy implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("JdkDynamicProxy invoke 方法执行前-------------------------------");
-        Object object= method.invoke(target,args);
-        System.out.println("JdkDynamicProxy invoke 方法执行后-------------------------------");
+        // 直接输出 hashCode 值，避免 invoke 递归调用，导致栈溢出
+        if (method.getName().equals("hashCode")) {
+            return hashCode();
+        }
+
+        System.out.println("JdkDynamicProxy1 invoke 方法执行前---------------" + info(proxy));
+        Object object= method.invoke(this.target, args);
+        System.out.println("JdkDynamicProxy1 invoke 方法执行后----------------" + info(proxy));
         return object;
+    }
+
+    /**
+     * 输出代理类的一些信息，比如类名，hashCode 等
+     * @param proxy
+     * @return
+     */
+    private String info(Object proxy) {
+        return proxy.getClass().getName() + ":" + proxy.hashCode() + "----------------" + this.tag;
     }
 
     /**

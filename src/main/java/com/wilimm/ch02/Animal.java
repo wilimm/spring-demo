@@ -1,4 +1,4 @@
-package com.wilimm.proxy.jdk;
+package com.wilimm.ch02;
 
 /**
  * @Author: wilimm
