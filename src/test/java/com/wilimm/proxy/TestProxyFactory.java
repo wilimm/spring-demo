@@ -30,6 +30,6 @@ public class TestProxyFactory {
         factory.addAdvice(new MyMethodInterceptor());
 
         Animal cat = (Animal) factory.getProxy();
-       cat.eat();
+        cat.eat();
     }
 }

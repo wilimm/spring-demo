@@ -6,4 +6,6 @@ package com.wilimm.ch02;
  */
 public interface Animal {
     void eat();
+
+    void go();
 }
