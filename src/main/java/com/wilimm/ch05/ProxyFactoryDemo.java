@@ -22,6 +22,7 @@ public class ProxyFactoryDemo {
 
         // 2. 通过目标对象，构造 ProxyFactory 对象
         ProxyFactory factory = new ProxyFactory(catTarget);
+        factory.setProxyTargetClass(true);
 
         // 添加一个 Advice (DefaultPointcutAdvisor)
         factory.addAdvice(new MyMethodInterceptor());
