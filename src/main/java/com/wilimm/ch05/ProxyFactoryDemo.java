@@ -4,7 +4,11 @@ import com.wilimm.ch02.Animal;
 import com.wilimm.ch02.Cat;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.aop.BeforeAdvice;
+import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.framework.ProxyFactory;
+
+import java.lang.reflect.Method;
 
 /**
  * @Author: wilimm
@@ -48,6 +52,16 @@ public class ProxyFactoryDemo {
 
             System.out.println("MyMethodInterceptor invoke 调用 after invocation.proceed");
             return ret;
+        }
+    }
+
+    public static class MyMethodBeforeAdvice implements MethodBeforeAdvice {
+
+        @Override
+        public void before(Method method, Object[] args, Object target) throws Throwable {
+                System.out.println("MyMethodBeforeAdvice before 调用");
+
+                System.out.println(method.getName());
         }
     }
 }
