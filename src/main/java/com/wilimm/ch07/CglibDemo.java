@@ -3,6 +3,7 @@ package com.wilimm.ch07;
 
 import net.sf.cglib.core.DebuggingClassWriter;
 import net.sf.cglib.proxy.Callback;
+import net.sf.cglib.proxy.Dispatcher;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;
 
@@ -16,6 +17,18 @@ import java.io.Serializable;
 public class CglibDemo {
 
     public static class SerializableNoOp implements NoOp, Serializable {
+    }
+
+    /**
+     * 直接用 loadObject 返回的对象调用被 CallbackFilter accept 的方法
+     */
+    public static class StaticDispatcher implements Dispatcher, Serializable {
+        @Override
+        public Object loadObject() {
+            Service service = new Service();
+            service.setTag("StaticDispatcher");
+            return service;
+        }
     }
 
 
@@ -33,7 +46,8 @@ public class CglibDemo {
         Callback[] callbacks =  new Callback[] {
                 myMethodInterceptor1,
                 myMethodInterceptor2,
-                new SerializableNoOp()
+                new SerializableNoOp(),
+                new StaticDispatcher()
         };
 
         enhancer.setCallbacks(callbacks);
@@ -46,6 +60,7 @@ public class CglibDemo {
 
         service.method1();
         service.method2();
+        service.returnThis();
 
     }
 

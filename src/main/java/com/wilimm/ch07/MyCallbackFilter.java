@@ -20,9 +20,9 @@ public class MyCallbackFilter implements CallbackFilter {
             System.out.println("filter method1 ==0");
             return 0;
         }
-        if(method.getName().equals("method2")){
-            System.out.println("filter method2 ==1");
-            return 2;
+        if(method.getName().equals("returnThis")){
+            System.out.println("filter returnThis ==1");
+            return 3;
         }
         return 0;
     }

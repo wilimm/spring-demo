@@ -27,5 +27,20 @@ public class Client {
         // 调用代理对象的方法
         proxyObject.finalMethod();
         proxyObject.publicMethod();
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        // 2. 根据目标对象生成代理对象
+        CglibDynamicProxy proxy2 = new CglibDynamicProxy(proxyObject);
+
+        // 获取 CGLIB 代理类
+        Service proxyObject2 = proxy2.getProxy();
+
+        proxyObject2.finalMethod();
+        proxyObject2.publicMethod();
     }
 }

@@ -3,8 +3,10 @@ package com.wilimm.ch03;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
+import org.springframework.util.ClassUtils;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 /**
  * @Author: wilimm
@@ -35,6 +37,7 @@ public class CglibDynamicProxy implements MethodInterceptor {
 
         System.out.println("obj = " + obj.getClass());
         System.out.println("method = " + method);
+        System.out.println("method.getDeclaringClass() = " + method.getDeclaringClass());
         System.out.println("proxy = " + proxy);
 
         Object object = proxy.invoke(target, args);
@@ -52,7 +55,12 @@ public class CglibDynamicProxy implements MethodInterceptor {
      */
     public <T> T getProxy() {
         Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(target.getClass());
+
+        Class proxySuperClass = target.getClass();
+        if (ClassUtils.isCglibProxyClass(target.getClass())) {
+            proxySuperClass = target.getClass().getSuperclass();
+        }
+        enhancer.setSuperclass(proxySuperClass);
         enhancer.setCallback(this);
         return (T) enhancer.create();
     }
