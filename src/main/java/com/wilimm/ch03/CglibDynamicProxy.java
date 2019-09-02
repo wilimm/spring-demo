@@ -1,5 +1,7 @@
 package com.wilimm.ch03;
 
+import net.sf.cglib.proxy.Callback;
+import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
@@ -62,6 +64,15 @@ public class CglibDynamicProxy implements MethodInterceptor {
         }
         enhancer.setSuperclass(proxySuperClass);
         enhancer.setCallback(this);
+
+        // 添加 CallbackFilter，让代理类名发生变化
+        // 主要是改变了 DefaultNamingPolicy 类中 getClassName 方法的 key 参数的 hashCode 值
+        enhancer.setCallbackFilter(new CallbackFilter() {
+            @Override
+            public int accept(Method method) {
+                return 0;
+            }
+        });
         return (T) enhancer.create();
     }
 }
